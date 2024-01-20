@@ -137,8 +137,11 @@ public class PlayerCntrl : NetworkBehaviour
         if (hp == 0)
         {
             isAlive = false;
-            if (owner != null) LogCntrl.Instance.ShowText(owner.nickname + " взорвал " + nickname + weapon);
-            owner.AddScore(100);
+            if (owner != null)
+            {
+                LogCntrl.Instance.ShowText(owner.GetNickname() + " взорвал " + GetNickname() + weapon);
+                owner.AddScore(100);
+            }
             score -= 20;
             Invoke(nameof(Respawn), respawnTime);
 
@@ -189,8 +192,8 @@ public class PlayerCntrl : NetworkBehaviour
     private void AliveStateChanged(bool prev, bool now)
     {
         sprite.SetActive(now);
-        coll.enabled = now;
-        trigger.enabled = now;
+        //coll.enabled = now;
+        //trigger.enabled = now;
         nicknameTxt.gameObject.SetActive(now);
         hpProgressBar.gameObject.SetActive(now);
 
