@@ -78,7 +78,7 @@ public class PlayerCntrl : NetworkBehaviour
         yield return new WaitForSeconds(5f);
         if (isInDangerZone && isAlive)
         {
-            TakeDamage(100, string.Empty);
+            TakeDamage(100, string.Empty, string.Empty);
             if (!isAlive) LogCntrl.Instance.ShowText(nickname + " взорвался в опасной зоне");
         }
     }
@@ -103,16 +103,27 @@ public class PlayerCntrl : NetworkBehaviour
     }
 
     [Server]
-    public void TakeDamage(int damage, string damageNickname)
+    public void TakeDamage(int damage, string damageNickname, string weapon)
     {
         hp -= damage;
         if (hp < 0) hp = 0;
         if (hp == 0)
         {
             isAlive = false;
-            if (damageNickname != string.Empty) LogCntrl.Instance.ShowText(damageNickname + " взорвал " + nickname);
+            if (damageNickname != string.Empty) LogCntrl.Instance.ShowText(damageNickname + " взорвал " + nickname + weapon);
             score -= 20;
             Invoke(nameof(Respawn), respawnTime);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!isServer) return;
+        if (other.CompareTag("Player"))
+        {
+            PlayerCntrl otherPlayer = other.gameObject.GetComponent<PlayerCntrl>();
+            TakeDamage(30, otherPlayer.nickname, " тараном");
+            otherPlayer.TakeDamage(30, nickname, " тараном");
         }
     }
 
