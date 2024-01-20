@@ -18,6 +18,7 @@ public class PlayerCntrl : NetworkBehaviour
     public float rotSpeed = 4.0f;
     public GameObject sprite;
     public GameObject bulletPrefab;
+    public GameObject explosionPrefab;
     public Transform cameraTargetPoint;
     public Transform bulletSpawn;
     public HPProgressBar hpProgressBar;
@@ -138,6 +139,9 @@ public class PlayerCntrl : NetworkBehaviour
             if (damageNickname != string.Empty) LogCntrl.Instance.ShowText(damageNickname + " взорвал " + nickname + weapon);
             score -= 20;
             Invoke(nameof(Respawn), respawnTime);
+
+            GameObject exp = Instantiate(explosionPrefab, trans.position, Quaternion.identity);
+            NetworkServer.Spawn(exp);
         }
     }
 
