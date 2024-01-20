@@ -6,6 +6,7 @@ TagManager:
   tags:
   - SPAWN_POINT
   - BULLET
+  - DEATH_ZONE
   layers:
   - Default
   - TransparentFX

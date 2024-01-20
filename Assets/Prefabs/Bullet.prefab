@@ -166,7 +166,7 @@ MonoBehaviour:
   syncDirection: 0
   syncMode: 0
   syncInterval: 0
-  moveSpeed: 25
+  moveSpeed: 30
 --- !u!114 &6723197080835660011
 MonoBehaviour:
   m_ObjectHideFlags: 0
