@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 6597433387950806845}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -169,9 +169,12 @@ MonoBehaviour:
   syncMode: 0
   syncInterval: 0
   nicknameTxt: {fileID: 8306056674416499154}
+  score: 0
   moveSpeed: 4
-  rotSpeed: 2
+  rotSpeed: 60
   cameraTargetPoint: {fileID: 3715526075981047302}
+  hpProgressBar: {fileID: 222337874043661227}
+  Id: -1
 --- !u!1 &6140223065200601075
 GameObject:
   m_ObjectHideFlags: 0
@@ -199,7 +202,7 @@ Transform:
   m_GameObject: {fileID: 6140223065200601075}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.529, z: 0}
+  m_LocalPosition: {x: 0, y: -0.67, z: 0}
   m_LocalScale: {x: 1, y: 0.2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -299,7 +302,7 @@ Transform:
   m_GameObject: {fileID: 6327019424060089320}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 4, z: 0}
+  m_LocalPosition: {x: 0, y: 3.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

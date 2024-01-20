@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class ParallaxBackgroundCntrl : MonoBehaviour
 {
     [SerializeField] private Image[] backgroundLayers;
-    public float[] layerSpeeds;
+    public Vector2[] layerSpeeds;
     public float moveScrollK = 1f;
 
     private List<Vector2> offsets;
@@ -19,13 +19,13 @@ public class ParallaxBackgroundCntrl : MonoBehaviour
     void Update()
     {
         for (int i = 0; i < backgroundLayers.Length; i++) {
-            Vector2 scrollVector = new Vector2(1f, 1f);
+            Vector2 scrollVector = new Vector2(1f, 0f);
             if (PlayerCntrl.LocalPlayer != null)
             {
                 scrollVector = PlayerCntrl.LocalPlayer.GetMoveVector().normalized * moveScrollK;
             }
-            offsets[i] += Vector2.right * layerSpeeds[i] * -scrollVector.x * Time.deltaTime;
-            offsets[i] += Vector2.up * layerSpeeds[i] * -scrollVector.y * Time.deltaTime;
+            offsets[i] += Vector2.right * layerSpeeds[i].x * -scrollVector.x * Time.deltaTime;
+            offsets[i] += Vector2.up * layerSpeeds[i].y * -scrollVector.y * Time.deltaTime;
             backgroundLayers[i].material.mainTextureOffset = offsets[i];
         }
     }

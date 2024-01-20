@@ -2140,9 +2140,10 @@ MonoBehaviour:
   - {fileID: 1925554088}
   - {fileID: 912486998}
   layerSpeeds:
-  - -0.02
-  - 0.01
-  - -0.008
+  - {x: -0.03, y: 0}
+  - {x: 0.02, y: 0}
+  - {x: -0.01, y: 0}
+  moveScrollK: 1
 --- !u!114 &1692451331
 MonoBehaviour:
   m_ObjectHideFlags: 0

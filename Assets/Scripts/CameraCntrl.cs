@@ -20,10 +20,10 @@ public class CameraCntrl : MonoBehaviour
         target = trans;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (target != null) trans.position = Vector3.Lerp(trans.position, 
             new Vector3(target.position.x, target.position.y, trans.position.z), 
-            lerpSpeed * Time.deltaTime);
+            lerpSpeed * Time.fixedDeltaTime);
     }
 }
