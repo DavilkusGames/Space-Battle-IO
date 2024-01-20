@@ -13,6 +13,11 @@ public class MainMenuManager : MonoBehaviour
     public GameObject connectingPanel;
     public float connectionTimeout = 5f;
 
+    private void Awake()
+    {
+        Application.targetFrameRate = 30;
+    }
+
     private void Start()
     {
         versionTxt.text = "v." + Application.version.ToString();
