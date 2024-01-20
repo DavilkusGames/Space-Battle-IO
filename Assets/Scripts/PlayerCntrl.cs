@@ -49,13 +49,11 @@ public class PlayerCntrl : NetworkBehaviour
             Camera.main.gameObject.GetComponent<CameraCntrl>().FocusCam();
             MinimapCntrl.Instance.SetTarget(trans);
         }
-        if (isClient && !isLocalPlayer) MinimapCntrl.Instance.AddEnemy(trans);
     }
 
     private void OnDestroy()
     {
         if (!isLocalPlayer) GameManager.Instance.RemovePlayer(Id);
-        else MinimapCntrl.Instance.RemoveEnemy(trans);
     }
 
     public Vector3 GetMoveVector()

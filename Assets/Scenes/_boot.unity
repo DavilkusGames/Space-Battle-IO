@@ -666,7 +666,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1544023309}
   - component: {fileID: 1544023310}
-  - component: {fileID: 1544023312}
   - component: {fileID: 1544023313}
   m_Layer: 0
   m_Name: -NETWORK-
@@ -738,20 +737,6 @@ MonoBehaviour:
   evaluationMethod: 0
   evaluationInterval: 3
   timeInterpolationGui: 0
---- !u!114 &1544023312
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1544023308}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6442dc8070ceb41f094e44de0bf87274, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  offsetX: 0
-  offsetY: 0
 --- !u!114 &1544023313
 MonoBehaviour:
   m_ObjectHideFlags: 0
