@@ -29,7 +29,7 @@ public class BulletCntrl : NetworkBehaviour
         if (!isServer) return;
         if (collision.CompareTag("Player") && collision.gameObject.GetComponent<PlayerCntrl>() != owner)
         {
-            collision.gameObject.GetComponent<PlayerCntrl>().TakeDamage(10, owner.GetNickname(), string.Empty);
+            collision.gameObject.GetComponent<PlayerCntrl>().TakeDamage(10, owner, string.Empty);
             Destroy(gameObject);
         }
         else if (collision.CompareTag("DEATH_ZONE")) Destroy(gameObject);

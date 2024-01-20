@@ -5684,6 +5684,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minimapMark: {fileID: 1623858741}
   scaleRatio: 0.5
+  enemyMarkPrefab: {fileID: 5921356789908580831, guid: 9dd4d4b00a8d2ae4298a1086aec825e2, type: 3}
+  markParent: {fileID: 2051367384}
 --- !u!1 &2089000929
 GameObject:
   m_ObjectHideFlags: 0

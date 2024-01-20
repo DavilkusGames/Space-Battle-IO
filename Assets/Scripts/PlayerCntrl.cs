@@ -49,11 +49,13 @@ public class PlayerCntrl : NetworkBehaviour
             Camera.main.gameObject.GetComponent<CameraCntrl>().FocusCam();
             MinimapCntrl.Instance.SetTarget(trans);
         }
+        if (isClient && !isLocalPlayer) MinimapCntrl.Instance.AddEnemy(trans);
     }
 
     private void OnDestroy()
     {
         if (!isLocalPlayer) GameManager.Instance.RemovePlayer(Id);
+        else MinimapCntrl.Instance.RemoveEnemy(trans);
     }
 
     public Vector3 GetMoveVector()
@@ -104,7 +106,7 @@ public class PlayerCntrl : NetworkBehaviour
         yield return new WaitForSeconds(5f);
         if (isInDangerZone && isAlive)
         {
-            TakeDamage(100, string.Empty, string.Empty);
+            TakeDamage(100, null, string.Empty);
             if (!isAlive) LogCntrl.Instance.ShowText(nickname + " взорвался в опасной зоне");
         }
     }
@@ -129,7 +131,7 @@ public class PlayerCntrl : NetworkBehaviour
     }
 
     [Server]
-    public void TakeDamage(int damage, string damageNickname, string weapon)
+    public void TakeDamage(int damage, PlayerCntrl owner, string weapon)
     {
         if (!isAlive) return;
         hp -= damage;
@@ -137,7 +139,8 @@ public class PlayerCntrl : NetworkBehaviour
         if (hp == 0)
         {
             isAlive = false;
-            if (damageNickname != string.Empty) LogCntrl.Instance.ShowText(damageNickname + " взорвал " + nickname + weapon);
+            if (owner != null) LogCntrl.Instance.ShowText(owner.nickname + " взорвал " + nickname + weapon);
+            owner.AddScore(100);
             score -= 20;
             Invoke(nameof(Respawn), respawnTime);
 
@@ -146,14 +149,20 @@ public class PlayerCntrl : NetworkBehaviour
         }
     }
 
+    [Server]
+    public void AddScore(int addSc)
+    {
+        score += addSc;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (!isServer) return;
         if (other.CompareTag("Player"))
         {
             PlayerCntrl otherPlayer = other.gameObject.GetComponent<PlayerCntrl>();
-            TakeDamage(30, otherPlayer.nickname, " тараном");
-            otherPlayer.TakeDamage(30, nickname, " тараном");
+            TakeDamage(30, otherPlayer, " тараном");
+            otherPlayer.TakeDamage(30, this, " тараном");
         }
     }
 
