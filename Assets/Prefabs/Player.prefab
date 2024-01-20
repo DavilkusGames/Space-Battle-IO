@@ -212,6 +212,7 @@ MonoBehaviour:
   sprite: {fileID: 6386626659060651349}
   bulletPrefab: {fileID: 1644313246547029688, guid: 0ac40be9b5fcd41418313b35374fde84, type: 3}
   cameraTargetPoint: {fileID: 3715526075981047302}
+  bulletSpawn: {fileID: 329975550495572971}
   hpProgressBar: {fileID: 222337874043661227}
   respawnTime: 5
   shootDelay: 0.2

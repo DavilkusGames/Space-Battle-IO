@@ -27,7 +27,7 @@ public class BulletCntrl : NetworkBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!isServer) return;
-        if (collision.CompareTag("Player"))
+        if (collision.CompareTag("Player") && collision.gameObject.GetComponent<PlayerCntrl>() != owner)
         {
             collision.gameObject.GetComponent<PlayerCntrl>().TakeDamage(10, owner.GetNickname(), string.Empty);
             Destroy(gameObject);
