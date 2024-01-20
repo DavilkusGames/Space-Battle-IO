@@ -6,8 +6,6 @@ public class HPProgressBar : MonoBehaviour
     public float maxValue = 100f;
     public Transform progressBarFill;
 
-    public float tmp;
-
     private float currentValue = 100f;
 
     public void SetProgress(float value)
@@ -17,6 +15,6 @@ public class HPProgressBar : MonoBehaviour
         float positionOffset = (1f - scale) / 2f;
 
         progressBarFill.transform.localScale = new Vector3(scale, 1f, 1f);
-        progressBarFill.transform.position = transform.position + new Vector3(positionOffset, 0f, 0f);
+        progressBarFill.transform.position = transform.position + new Vector3(positionOffset, 0f, -0.05f);
     }
 }

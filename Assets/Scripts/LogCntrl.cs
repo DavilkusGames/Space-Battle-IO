@@ -10,6 +10,18 @@ public class LogCntrl : NetworkBehaviour
     private TMP_Text txt;
     private string text = string.Empty;
 
+    public static LogCntrl Instance;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
+    private void OnDestroy()
+    {
+        Instance = null;
+    }
+
     private void Start()
     {
         txt = GetComponent<TMP_Text>();

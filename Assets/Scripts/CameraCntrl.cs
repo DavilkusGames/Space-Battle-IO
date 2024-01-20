@@ -20,6 +20,11 @@ public class CameraCntrl : MonoBehaviour
         target = trans;
     }
 
+    public void FocusCam()
+    {
+        trans.position = new Vector3(target.position.x, target.position.y, trans.position.z);
+    }
+
     private void FixedUpdate()
     {
         if (target != null) trans.position = Vector3.Lerp(trans.position, 
