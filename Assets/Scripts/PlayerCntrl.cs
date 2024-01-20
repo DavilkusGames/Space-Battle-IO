@@ -17,14 +17,19 @@ public class PlayerCntrl : NetworkBehaviour
     public float moveSpeed = 3.0f;
     public float rotSpeed = 4.0f;
     public GameObject sprite;
+    public GameObject bulletPrefab;
     public Transform cameraTargetPoint;
+    public Transform bulletSpawn;
     public HPProgressBar hpProgressBar;
     public int respawnTime = 5;
+    public float shootDelay = 0.2f;
 
     private Rigidbody2D rb;
     private Transform trans;
     private CircleCollider2D coll;
     private bool isInDangerZone = false;
+    private float nextShootTime = 0f;
+    private bool isShooting = false;
     [SyncVar] public int Id = -1;
 
     public static PlayerCntrl LocalPlayer;
@@ -61,9 +66,29 @@ public class PlayerCntrl : NetworkBehaviour
 
     private void Update()
     {
-        if (!isLocalPlayer || !isAlive) return;
+        if (!isAlive) return;
+        if (isServer && isShooting && Time.time >= nextShootTime)
+        {
+            GameObject bullet = Instantiate(bulletPrefab);
+            bullet.transform.position = bulletSpawn.position;
+            bullet.transform.rotation = trans.rotation;
+            bullet.GetComponent<BulletCntrl>().Init(this);
+            NetworkServer.Spawn(bullet);
+            nextShootTime = Time.time + shootDelay;
+        }
+
+        if (!isLocalPlayer) return;
         rb.angularVelocity = -Input.GetAxis("Horizontal") * rotSpeed;
         rb.velocity = GetMoveVector();
+
+        if (Input.GetMouseButtonDown(0)) ShootStateCmd(true);
+        if (Input.GetMouseButtonUp(0)) ShootStateCmd(false);
+    }
+
+    [Command]
+    private void ShootStateCmd(bool isShooting)
+    {
+        this.isShooting = isShooting;
     }
 
     public void SetDangerZoneState(bool state)
