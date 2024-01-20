@@ -28,6 +28,7 @@ public class PlayerCntrl : NetworkBehaviour
     private Rigidbody2D rb;
     private Transform trans;
     private CircleCollider2D coll;
+    private CircleCollider2D trigger;
     private bool isInDangerZone = false;
     private float nextShootTime = 0f;
     private bool isShooting = false;
@@ -38,7 +39,6 @@ public class PlayerCntrl : NetworkBehaviour
     private void Start()
     {
         trans = transform;
-        coll = GetComponent<CircleCollider2D>();
         rb = GetComponent<Rigidbody2D>();
 
         if (isLocalPlayer)
@@ -131,6 +131,7 @@ public class PlayerCntrl : NetworkBehaviour
     [Server]
     public void TakeDamage(int damage, string damageNickname, string weapon)
     {
+        if (!isAlive) return;
         hp -= damage;
         if (hp < 0) hp = 0;
         if (hp == 0)
@@ -182,6 +183,7 @@ public class PlayerCntrl : NetworkBehaviour
     {
         sprite.SetActive(now);
         coll.enabled = now;
+        trigger.enabled = now;
         nicknameTxt.gameObject.SetActive(now);
         hpProgressBar.gameObject.SetActive(now);
 
